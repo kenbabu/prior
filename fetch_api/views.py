@@ -1,11 +1,15 @@
-# from django.shortcuts import render
+from django.shortcuts import render
+from django.core.exceptions import ObjectDoesNotExist
 from rest_framework.views import APIView
 from rest_framework.views import Response
 from rest_framework.views import status
 from fetch_api.utils import (
     count_nodes,
     fetch_nodes,
+    fetch_node_details,
 )
+def homepage(request):
+    return render(request,"homepage.html")
 
 class GetNodesCount(APIView):
     def get(self, request):
@@ -42,4 +46,26 @@ class GetNodesData(APIView):
         return Response(data)
 class GetNodeData(APIView):
     def get(self, request):
-        return Response('Temporary Data', status=status.HTTP_200_OK)
+        node_info = {
+            'node_type': request.GET.get('t', 'Protein'),
+            'node_id': request.GET.get('q', ''),
+
+        }
+        try:
+            node_details = fetch_node_details(node_info)
+            data = {
+                'response': {
+                    'status': '200',
+                    'data': node_details,
+                },
+            }
+        except ObjectDoesNotExist:
+            data = {
+                'response':{
+                    'status': '200',
+                    'data': []
+
+                },
+            }
+            return Response(data)
+        return Response(data)

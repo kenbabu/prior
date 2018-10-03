@@ -5,15 +5,17 @@ from neomodel import (
     RelationshipFrom,
     Relationship
 )
+from .nodeutils import NodeUtils
 
 class GO(StructuredNode):
-    goid =  StringProperty()
+    goid = StringProperty()
+    prot = RelationshipFrom('.proteins.Protein', 'HAS_ANNOTATION')
 
     @property
     def serialize(self):
         return {
             'node_properties': {
-                'goid': self.uniprotid,
+                'goid': self.goid,
                 'id': self.id,
                                 },
                 }

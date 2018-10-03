@@ -24,8 +24,9 @@ router.register(r'users', views.UserViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    url(r'^home', views.homepage, name='home'),
     url(r'^', include(router.urls)),
-    url(r'^fetch/',include('fetch_api.urls', namespace='fetch_api')), 
+    url(r'^fetch/',include('fetch_api.urls', namespace='fetch_api')),
     path('prioritize/', include('prioritize.urls')),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 

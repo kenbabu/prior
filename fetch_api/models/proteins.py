@@ -27,7 +27,7 @@ class Protein(StructuredNode, NodeUtils):
         # nodes in the database.
         return [
             {
-                'nodes_type':'GO'
+                'nodes_type':'GO',
                 'nodes_related': self.serialize_relationships(self.go.all()),
             },
         ]

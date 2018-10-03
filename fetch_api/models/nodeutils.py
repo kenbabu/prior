@@ -17,4 +17,4 @@ class NodeUtils:
             )
             serialized_node['node_relationship'] = results[0][0]
             serialized_nodes.append(serialized_node)
-        return serialize_nodes 
+        return serialized_nodes

@@ -53,6 +53,12 @@ def fetch_node_details(node_info):
     node_details    = node.serialize
 
     # Make sure to return an empty array if not connections
+    node_details['node_connections'] = []
+    if (hasattr(node, 'serialize_connections')):
+        print("Node has relationships")
+        node_details['node_connections'] = node.serialize_connections
+    return node_details
+
 
 def fetch_proteins():
     return PROTEINS

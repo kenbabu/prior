@@ -9,6 +9,8 @@ from py2neo import Graph
 # Create your views here.
 def indexView(request):
 	return render(request, 'prioritize/index.html')
+def homepage(request):
+    return render(request,"prioritize/index.html")
 
 class UserViewSet(viewsets.ModelViewSet):
     """
