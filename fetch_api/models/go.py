@@ -6,16 +6,14 @@ from neomodel import (
     Relationship
 )
 
-class Protein(StructuredNode):
-    uniprotid = StringProperty()
-    # drugs = RelationshipFrom('.drug.Drug', 'TARGETS')
-    go = RelationshipTo('.go.GO', 'HAS_ANNOTATION')
+class GO(StructuredNode):
+    goid =  StringProperty()
 
     @property
     def serialize(self):
         return {
             'node_properties': {
-                'uniprotid': self.uniprotid,
+                'goid': self.uniprotid,
                 'id': self.id,
                                 },
                 }
