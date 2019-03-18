@@ -8,8 +8,9 @@ from fetch_api.utils import (
     fetch_nodes,
     fetch_node_details,
 )
-def homepage(request):
-    return render(request,"homepage.html")
+
+def fetch_home(request):
+    return render(request, "fetch_api/api_home.html")
 
 class GetNodesCount(APIView):
     def get(self, request):

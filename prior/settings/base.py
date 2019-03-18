@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'prioritize',
     'rest_framework',
+    'fetch_api',
 ]
 
 MIDDLEWARE = [

@@ -1,0 +1,87 @@
+{% extends 'base_layout.html'%}
+<!--
+<script type="text/javascript">
+//   {% block jquery %}
+//     var endpoint = '/fetch/home/'
+//     $.ajax({
+//       method: "GET",
+//       url: endpoint,
+//       success:function(data){
+//         console.log(data)
+//       },
+//       error: function(error_data){
+//         console.log(error_data)
+//       }
+//     })
+// {% endblock %}
+
+</script>
+-->
+
+{% block content %}
+  <h1>List of available API Endpoints</h1>
+<script type="text/javascript" src= "https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js" charset="utf-8"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.css" type="text/css">
+
+<style type="text/css">
+#mynetwork {
+  width: 600px;
+  height: 400px;
+  border: 1px solid lightblue;
+}
+
+</style>
+<div id="mynetwork">
+</div>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+<script type="text/javascript">
+   var endpoint = '/fetch/nodes'
+   // var prots = {{ data }}
+
+   $.ajax({
+         method: "GET",
+         url: endpoint,
+         success:function(data){
+             console.log(data);
+
+         },
+         error: function(error_data){
+           console.log(error_data)
+         }
+       })
+    // create an array with nodes
+    console.log("The data")
+    // console.log(prots)
+    var nodes = new vis.DataSet([
+        {id: 1, label: 'Prot 1'},
+        {id: 2, label: 'Prot 2'},
+        {id: 3, label: 'Prot 3'},
+        {id: 4, label: 'Prot 4'},
+        {id: 5, label: 'Prot 5'}
+    ]);
+
+    // create an array with edges
+    var edges = new vis.DataSet([
+        {from: 1, to: 3},
+        {from: 1, to: 2},
+        {from: 2, to: 4},
+        {from: 2, to: 5}
+    ]);
+
+    // create a network
+    var container = document.getElementById('mynetwork');
+
+    // provide the data in the vis format
+    var data = {
+        nodes: nodes,
+        edges: edges
+    };
+    var options = {};
+
+    // initialize your network!
+    var network = new vis.Network(container, data, options);
+</script>
+{% endblock %}
