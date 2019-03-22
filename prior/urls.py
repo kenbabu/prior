@@ -17,15 +17,19 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls import url
 from rest_framework import routers
-from  prioritize import views
+from prioritize import views
+from accounts.views import (
+    signup, )
 
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url(r'^home', views.homepage, name='home'),
-    url(r'^', include(router.urls)),
+    path('signup/',signup, name='signup' ),
+    path('accounts/', include('django.contrib.auth.urls')),
+    url(r'^$', views.homepage, name='home'),
+    # url(r'^', include(router.urls)),
     url(r'^fetch/',include('fetch_api.urls', namespace='fetch_api')),
     path('prioritize/', include('prioritize.urls')),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
